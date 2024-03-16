@@ -25,6 +25,8 @@ createApp({
         lidarOperador(botao) {
             if (this.operador !== null && !this.aguardandoOperacao) {
                 this.lidarIgual();
+            } else {
+                this.numeroAnterior = parseFloat(this.display);
             }
             this.operador = botao;
             this.aguardandoOperacao = true;
@@ -34,13 +36,15 @@ createApp({
             if (this.aguardandoOperacao) {
                 this.display = numero;
                 this.aguardandoOperacao = false;
+            } else if (this.display === '0') {
+                this.display = numero;
             } else {
-                this.display = this.display === '0' ? numero : this.display + numero;
-            }
+                this.display += numero;
+            }   
         },
         lidarIgual() {
             if (this.operador && !this.aguardandoOperacao) {
-                const operacao = this.numeroAnterior + ' ' + this.operador + ' ' + parseFloat(this.display);
+                const operacao = this.numeroAnterior + ' ' + this.operador + ' ' + parseInt(this.display);
                 this.display = eval(operacao);
                 this.operador = null;
                 this.numeroAnterior = null;
