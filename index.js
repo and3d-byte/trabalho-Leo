@@ -40,7 +40,15 @@ createApp({
                 this.display = numero;
             } else {
                 this.display += numero;
-            }   
+            }
+        },
+        lidarDecimal() {
+            if (this.aguardandoOperacao) {
+                this.display = '0.';
+                this.aguardandoOperacao = false;
+            } else if (!this.display.includes('.')) {
+                this.display += '.';
+            }
         },
         lidarIgual() {
             if (this.operador && !this.aguardandoOperacao) {
